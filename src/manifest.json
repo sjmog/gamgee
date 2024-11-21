@@ -1,5 +1,5 @@
 {
-    "name": "Mic & Tab Transcription",
+    "name": "gamgee",
     "version": "1.0",
     "manifest_version": 3,
     "permissions": ["storage", "tabs", "scripting"],
