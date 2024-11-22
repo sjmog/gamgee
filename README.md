@@ -8,18 +8,24 @@ A Chrome browser extension that transcribes audio from your browser tab and micr
 
 ### Development Setup
 1. Clone this repository
-2. Open [chrome://extensions/](chrome://extensions/) from your address bar
-3. Turn on developer mode in the top right
-4. Click "Load unpacked", and select the `src` directory
+2. Run `npm install` to install dependencies
+3. Run `npm run dev` to start both webpack and the Tailwind compiler in watch mode
+4. Open [chrome://extensions/](chrome://extensions/) from your address bar
+5. Turn on developer mode in the top right
+6. Click "Load unpacked", and select the `dist` directory
 
 ### Development Workflow
 1. Make changes to files in the `src` directory
-2. Go to [chrome://extensions/](chrome://extensions/)
-3. Find the "Gamgee" extension card
-4. Click the circular refresh/reload icon (🔄) on the extension card
-5. Your changes will now be available in the extension
+2. Keep `npm run dev` running to automatically compile changes
+3. Go to [chrome://extensions/](chrome://extensions/)
+4. Find the "Gamgee" extension card
+5. Click the circular refresh/reload icon (🔄) on the extension card
+6. Your changes will now be available in the extension
 
-Note: You'll need to reload the extension (step 4) whenever you make changes to the code. If you're modifying the sidebar or options pages, you'll also need to close and reopen them to see your changes.
+Note: You'll need to reload the extension (step 5) whenever you make changes to the code. If you're modifying the sidebar or options pages, you'll also need to close and reopen them to see your changes.
+
+### Build for Production
+Run `npm run build` to create a production build in the `dist` directory.
 
 ## Usage
 
@@ -30,21 +36,33 @@ Note: You'll need to reload the extension (step 4) whenever you make changes to 
 
 ## Code Structure
 
+### Build System
+The project uses webpack to bundle JavaScript and React components, and Tailwind CSS for styling. The build process:
+- Compiles React JSX files
+- Processes CSS with Tailwind
+- Bundles all JavaScript
+- Copies static assets to the dist folder
+
 ### `manifest.json`
 The manifest file is required for Chrome extensions. The provided `permissions` allow for storage (of transcripts and your API Key), access to tab data, the ability to execute our transcription script, and the sidebar functionality. The `host_permissions` allow for this extension to run on any URL - you can change it if you want to limit its usage to only specific websites.
 
+### React Components
+
+#### `components/Sidebar.jsx`
+The main React component for the sidebar interface. It handles:
+- Displaying and updating the transcript
+- Starting and stopping transcription
+- Clearing the transcript
+- Opening the options page
+- Managing Chrome extension messaging and storage
+
+The component uses Tailwind CSS for styling, providing a modern and responsive interface.
+
 ### `sidebar.html` and `sidebar.js`
-The sidebar is the main interface that appears on the right side of the browser window when the extension icon is clicked. On load, it fetches the latest transcript from storage, if there is one.
+The sidebar entry points that load the React application. The HTML file provides the root element and loads the necessary styles and scripts, while the JS file initializes the React application.
 
-When the start button is clicked, the sidebar gets the current tab, and executes `content-script.js`.
-
-When the stop button is clicked, a message is sent to `content-script.js` with the message 'stop'.
-
-When the clear button is clicked, the currently-stored `transcript` value is removed.
-
-When the options button is clicked, the extension's `options.html` file is opened.
-
-When the sidebar receives a message with the value 'transcriptavailable', it gets the latest complete transcript from storage and adds it to the display.
+### `styles.css`
+Contains the Tailwind CSS directives that are compiled into the final CSS used by the application.
 
 ### `options.html` and `options.js`
 The options pane gets and displays the existing Deepgram API key from storage, if it exists. It can also be used to save a new key.

@@ -1,37 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <style>
-      body {
-        width: 100%;
-        min-width: 300px;
-        height: 100vh;
-        margin: 0;
-        padding: 1em;
-        box-sizing: border-box;
-      }
-      button { width: 100%; }
-      #controls { 
-        display: grid; 
-        grid-template-columns: 1fr 1fr 1fr; 
-        gap: 1em; 
-        margin-top: 1em; 
-      }
-      #transcript {
-        margin-top: 1em;
-        max-height: calc(100vh - 120px);
-        overflow-y: auto;
-      }
-    </style>
+    <link href="sidebar.css" rel="stylesheet">
   </head>
   <body>
-    <button id="options">Options</button>
-    <div id="controls">
-      <button id="start">Start transcription</button>
-      <button id="stop">Stop transcription</button>
-      <button id="clear">Clear transcription</button>
-    </div>
-    <p id="transcript"></p>
+    <div id="root"></div>
     <script src="sidebar.js"></script>
   </body>
 </html> 
