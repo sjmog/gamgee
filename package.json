@@ -1,15 +1,7 @@
 {
   "name": "gamgee",
   "version": "1.0.0",
-  "scripts": {
-    "dev": "webpack --watch --config webpack.config.js",
-    "build": "webpack --config webpack.config.js"
-  },
   "devDependencies": {
-    "@types/chrome": "^0.0.260",
-    "copy-webpack-plugin": "^12.0.2",
-    "webpack": "^5.90.3",
-    "webpack-cli": "^5.1.4",
-    "webpack-ext-reloader": "^1.1.13"
+    "@types/chrome": "^0.0.260"
   }
 }

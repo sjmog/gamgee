@@ -2,13 +2,20 @@
     "name": "gamgee",
     "version": "1.0",
     "manifest_version": 3,
-    "permissions": ["storage", "tabs", "scripting"],
+    "permissions": ["storage", "tabs", "scripting", "sidePanel"],
+    "background": {
+        "service_worker": "background.js",
+        "type": "module"
+    },
     "action": {
-        "default_popup": "popup.html"
+        "default_title": "Click to open gamgee meeting assistant"
+    },
+    "side_panel": {
+        "default_path": "sidebar.html"
     },
     "host_permissions": ["*://*/"],
     "options_page": "options.html",
     "content_security_policy": {
-        "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'"
+        "extension_pages": "script-src 'self'; object-src 'self'"
     }
 }
